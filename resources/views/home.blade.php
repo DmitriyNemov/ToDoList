@@ -16,7 +16,7 @@
                     <h3>To-do List</h3>
                     <form action="{{ route('store') }}" method="POST" autocomplete = "off">
                         @csrf
-                        @methos('POST')
+                        @method('POST')
                        <i class="fa fa-cc-stripe" aria-hidden="true"></i> 
                        <div class="input-group">
                             <input type="text" name="content" class="form-controll" placeholder="Add your new todo">
@@ -30,10 +30,12 @@
                     
                         <li class="list-group-item">
                             <form action="route('destroy', $todolist->id)" method="POST">
+                                @csrf
                                 {{$todolist->content}}
                             <i class="fa fa-cc-stripe" aria-hidden="true"></i> 
                                 @method('delete')
-                                <buttun type="submit" class="btn btn-link btn-sm float-end"><i class="fas fa-trash"></i></button>
+                                <button type="submit" class="btn btn-link btn-sm float-end"><i class="fas fa-trash"></i></button>
+                            </form>
                         </li>
                     
                         @endforeach
@@ -46,6 +48,7 @@
                 <div class="card-footer">
                     You have {{count($todolists) }} pending tasks
                 </div>
+                @endif
             </div>
         </div>
 

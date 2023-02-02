@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', action:'ToDoListController@index')->name('index');
-Route::post('/', action:'ToDoListController@store')->name('store');
+Route::post('/store', action:'ToDoListController@store')->name('store');
 Route::delete('/{todolist:id}', action:'ToDoListController@destroy')->name('destroy');
