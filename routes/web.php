@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', action:'ToDoListController@index')->name('index');
+Route::post('/', action:'ToDoListController@store')->name('store');
+Route::delete('/{todolist:id}', action:'ToDoListController@destroy')->name('destroy');
