@@ -10,23 +10,48 @@ class ToDoListController extends Controller
     public function index()
     {
         $todolists = ToDoList::all();
-        return view('home', compact('todolists'));
+        return view('index', compact('todolists'));
     }
 
-    public function store(Request $request)
+    public function create()
     {
-        $data= $request ->validate([
-            'content' => 'required'
+        return view('create');
+    }
+
+    public function store()
+    {
+        $data=request()->validate([
+            'content' => 'string'
         ]);
         ToDoList::create($data);
-        return back();
+        return redirect()->route('todo.index');
     }
 
-    public function destroy(ToDoList $todolist)
+    public function show(ToDoList $todo)
     {
-        $todolist->delete();
-        return back();
+        return view('show', compact('todo'));
     }
+
+    public function edit(ToDoList $todo)
+    {
+        return view('edit', compact('todo'));
+    }
+
+    public function update(ToDoList $todo)
+    {
+        $data=request()->validate([
+            'content' => 'string'
+        ]);
+       $todo->update($data);
+       return redirect()->route('todo.show',$todo->id);
+    }
+
+    public function destroy( ToDoList $todo)
+    {
+        $todo->delete();
+        return redirect()->route('todo.index');
+    }
+    
 
 }
 
